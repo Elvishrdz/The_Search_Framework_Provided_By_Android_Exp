@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.eahm.thesearchframeworkprovidedbyandroid">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".ui.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- the meta-data tag enable the search dialog to send searches to SearchActivity from NewsActivity -->
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".ui.SearchActivity" />
+            <!-- If you want every activity in your application to provide the search dialog, insert the
+            above <meta-data> element as a child of the <application> element, instead of each <activity>.-->
+        </activity>
+
+        <!-- this activity will perform searches and present results -->
+        <activity android:name=".ui.SearchActivity"
+            android:launchMode="singleTop">
+
+            <!-- 1. Declare the activity to accept the ACTION_SEARCH intent, in an <intent-filter> element.-->
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <!--2. The <meta-data> element must include the android:name="android.app.searchable" and
+            the android:resource attribute with a reference to the searchable configuration file-->
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
+
+        <!-- this activity enables the search dialog to initiate searches in the SearchActivity -->
+        <activity android:name=".ui.NewsActivity" >
+            <!-- the meta-data tag enable the search dialog to send searches to SearchActivity from NewsActivity -->
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".ui.SearchActivity" />
+            <!-- If you want every activity in your application to provide the search dialog, insert the
+            above <meta-data> element as a child of the <application> element, instead of each <activity>.-->
+        </activity>
+
+       <!-- search suggestions:
+        declare the content provider in the application manifest with the same authority string used in
+        your extended SearchRecentSuggestionsProvider class. (See SearchSuggestionProvider.kt |
+        | See searchable.xml->searchSuggestAuthority attribute) -->
+        <provider android:name=".provider.SearchSuggestionProvider"
+            android:authorities="com.eahm.SearchSuggestionProvider"
+            android:exported="false" />
+
+    </application>
+
+</manifest>

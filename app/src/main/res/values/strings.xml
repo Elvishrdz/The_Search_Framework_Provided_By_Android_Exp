@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Search By Android</string>
+    <string name="text_main">Search Framework Implementation!</string>
+    <string name="search_hint">Search technicians</string>
+    <string name="search">search</string>
+    <string name="voice_message">Say a profession</string>
+    <string name="open_news_activity">Open the News Activity</string>
+    <string name="open_search_dialog">Open Search Dialog</string>
+    <string name="welcome_news_activity">Welcome to the news activity!</string>
+</resources>

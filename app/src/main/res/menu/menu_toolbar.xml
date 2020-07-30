@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Remove "actionViewClass" attribute if you use widget and dialog search (see MainActivity.kt -> onCreateOptionsMenu()) -->
+    <item
+        android:id="@+id/menu_search"
+        android:title="@string/search"
+        android:icon="?android:attr/actionModeWebSearchDrawable"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always"/>
+
+</menu>

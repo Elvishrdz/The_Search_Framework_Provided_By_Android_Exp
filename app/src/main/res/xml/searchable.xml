@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The searchable configuration file must include the <searchable> element as
+    the root node and specify one or more attributes-->
+<searchable xmlns:android="http://schemas.android.com/apk/res/android"
+    android:label="@string/app_name"
+    android:hint="@string/search_hint"
+
+    android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
+    android:voiceMaxResults="5"
+    android:voicePromptText="@string/voice_message"
+
+    android:searchSuggestAuthority="com.eahm.SearchSuggestionProvider"
+    android:searchSuggestSelection=" ?"
+
+    />
+
+<!-- The android:label attribute is the only required attribute. It points to a string
+    resource, which should be the application name. This label isn't actually visible
+    to the user until you enable search suggestions for Quick Search Box. At that point,
+    this label is visible in the list of Searchable items in the system Settings.-->
+
+<!-- Tip: For consistency among other Android applications, you should format the string for
+    android:hint as "Search <content-or-product>". For example, "Search songs and artists"
+    or "Search YouTube".-->
+
+<!-- Voice Search Mode:
+    The value showVoiceSearchButton is required to enable voice search.
+    The value launchRecognizer specifies that the voice search button should launch a recognizer
+    that returns the transcribed text to the searchable activity.
+
+    ** All searches performed with the voice search button are immediately sent to your searchable
+    activity without a chance for the user to review the transcribed query. -->
+
+<!-- Search Suggestions:
+    To configure the system to use your suggestions provider, you need to add to the
+    <searchable> element in your searchable configuration file:
+
+    android:searchSuggestAuthority -> must exactly match the authority string used in the content
+                                      provider (See SearchSuggestionProvider.kt || See
+                                      AndroidManifest.xml-><application>-><provider>)
+
+    android:searchSuggestSelection -> must be a single question mark, preceded by a space (" ?"),
+                                      is simply a placeholder for the SQLite selection argument
+                                      (which is automatically replaced by the query text entered
+                                      by the user). -->
+
+<!-- Custom Search Suggestions:
+    To configure the system to use your custom suggestions provider, you need to add to the
+    <searchable> element in your searchable configuration file:
+
+    android:searchSuggestAuthority ->
+
+    android:searchSuggestIntentAction -> android.intent.action.VIEW
+                                        define the action for all suggestions (by default).
+                                        If is not specified then you must include a value in the
+                                        SUGGEST_COLUMN_INTENT_ACTION column for every suggestion, or
+                                        the intent will fail.
+                                        Declaring a specific intent action in the
+                                        SUGGEST_COLUMN_INTENT_ACTION column will override this action.
+          ** The most common intent action for a custom suggestion is ACTION_VIEW, which is
+          appropriate when you want to open something, like the definition for a word, a person's
+          contact information, or a web page. However, the intent action can be any other action and
+          can even be different for each suggestion.
+
+ Declaring intent data:
+ android:searchSuggestIntentData -> content:://com.eahm/database
+                                  Declare the piece of the URI that is common to all suggestions.
+                                  **Then include the final path for each suggestion (the unique part)
+                                  in the SUGGEST_COLUMN_INTENT_DATA_ID column of your suggestions table.
+
+          Then include the final path for each suggestion (the unique part) in the
+          SUGGEST_COLUMN_INTENT_DATA_ID column of your suggestions table. When the user selects a suggestion,
+          the system takes the string from android:searchSuggestIntentData, appends a slash ("/") and
+          then adds the respective value from the SUGGEST_COLUMN_INTENT_DATA_ID column to form a complete
+          content URI. You can then retrieve the Uri with getData().
+
+          Add more data: If you need to express even more information with your intent, you can
+           add another table column, SUGGEST_COLUMN_INTENT_EXTRA_DATA, which can store additional
+           information about the suggestion. The data saved in this column is placed in EXTRA_DATA_KEY
+           of the intent's extra Bundle.
+
+
+
+
+
+
+-->
+
